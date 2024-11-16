@@ -50,11 +50,11 @@ class AntiVirusApp:
             bg="white",
             fg="#555555",
             relief="flat",
-            insertbackground="#0026ff"  # Cursor color
+            insertbackground="#0026ff" 
         )
         file_entry.grid(row=0, column=0, padx=10, pady=5, ipadx=8, ipady=8)
 
-        # Browse button with hover effects
+        #button
         browse_button = tk.Button(
             file_frame,
             text="Browse",
@@ -131,8 +131,8 @@ class AntiVirusApp:
     def get_file_hashes(self, file_path):
         with open(file_path, 'rb') as file:
             file_data = file.read()
-            sha256_hash = hashlib.sha256(file_data).hexdigest()
-        return sha256_hash
+            hash = hashlib.sha256(file_data).hexdigest()    #hash is sha256
+        return hash
 
     def identify_file_type(self, file_path):
         file_type = magic.from_file(file_path)
@@ -140,7 +140,7 @@ class AntiVirusApp:
 
     def check_for_virus_signatures(self, file_path):
         file_hash = self.get_file_hashes(file_path)
-        with open('hashes.txt', 'r') as file:
+        with open('hashes.txt', 'r') as file:        #hash input 
             lines = file.readlines()
         virus_signatures = [line.strip() for line in lines]
 
@@ -160,7 +160,7 @@ class AntiVirusApp:
                 print(f"File '{file_path}' does not exist.")
 
 
-        if file_hash in virus_signatures:
+        if file_hash in virus_signatures:       #check if it is clean or not
             return True
             check_and_delete_file(file_path)
         else:
@@ -169,16 +169,16 @@ class AntiVirusApp:
 
     def scan_file(self):
         file_path = self.file_path.get()
-        if not os.path.isfile(file_path):
+        if not os.path.isfile(file_path):                              #check file path
             self.status_var.set(f"Invalid file path: {file_path}")
             messagebox.showerror("Invalid File", f"Invalid file path: {file_path}")
             return
 
-        file_type = self.identify_file_type(file_path)
+        file_type = self.identify_file_type(file_path)                    
         self.status_var.set(f"Scanning file: {file_path} ({file_type})")
 
 
-        if self.check_for_virus_signatures(file_path):
+        if self.check_for_virus_signatures(file_path):                                  #give pop up wether it is clean or not
             self.status_var.set(f"Virus detected in {file_path}!")
             messagebox.showerror("Virus Detected", f"Virus detected in {file_path}!")
         else:
