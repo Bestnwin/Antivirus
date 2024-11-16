@@ -5,6 +5,7 @@ import pyfiglet
 import requests
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
+from PIL import Image, ImageTk
 
 class AntiVirusApp:
     def __init__(self, master):
@@ -14,6 +15,15 @@ class AntiVirusApp:
         self.master.configure(bg="#dbeeff") #background
 
         self.create_widgets()
+        self.set_window_icon("C:\Antivirus\logo1.png")
+
+    
+    def set_window_icon(self, image_path):
+        img = Image.open(image_path)
+        photo = ImageTk.PhotoImage(img)
+        self.master.iconphoto(True, photo)  
+
+
 
     def create_widgets(self):
         
@@ -67,8 +77,7 @@ class AntiVirusApp:
         browse_button.bind("<Enter>", on_browse_hover)
         browse_button.bind("<Leave>", on_browse_leave)
 
-        # Scan button
-        scan_button = tk.Button(
+        scan_button = tk.Button(    #scan button 
             self.master,
             text="Scan File",
             font=("Helvetica", 16, "bold"),
@@ -82,15 +91,26 @@ class AntiVirusApp:
             command=self.scan_file,
         )
         scan_button.pack(pady=20)
+        
 
-        # Status label
+        #hover button 
+        def scan_hover(event):      
+            scan_button.config(bg="blue")
+
+        def on_scan_leave(event):
+            scan_button.config(bg="#0099ff")
+
+        scan_button.bind("<Enter>", scan_hover)
+        scan_button.bind("<Leave>", on_scan_leave)
+
+
+
         self.status_var = tk.StringVar()
         self.status_var.set("ready")
         status_label = tk.Label(self.master, textvariable=self.status_var, font=("Helvetica", 14), bg="#dbeeff", fg="#0099ff")
         status_label.pack(pady=20)
         
     def animate_logo(self):
-        # Create animated antivirus_logo text
         logo_frames = pyfiglet.figlet_format("AntiVirus", font="big").split("\n")
         self.current_frame = 0
 
@@ -98,7 +118,7 @@ class AntiVirusApp:
             if self.current_frame < len(logo_frames):
                 self.canvas.itemconfig(self.logo_text, text="\n".join(logo_frames[: self.current_frame + 1]))
                 self.current_frame += 1
-                self.master.after(200, update_frame)  # Delay between frames
+                self.master.after(200, update_frame) 
 
         update_frame()
 
@@ -124,19 +144,13 @@ class AntiVirusApp:
             lines = file.readlines()
         virus_signatures = [line.strip() for line in lines]
 
-        #virus_signatures = ['f5c34a6757804a619a99a1ba73ba51ba25a158e5ee6e9cc86a2be1292064e415', 'd2097c734fa39a904796dc832946d5c23f400c7a','6af7bb44c8e6e041bf2ee6b7a60d9ab3','2eabe9054cad5152567f0699947a2c5b','6b1d37510f2465cd2931c4814b85f21115dda4c6694667c734142e03235917ae']  # Replace with actual virus signatures
-
+       
         def check_and_delete_file(file_path):
-            # Check if the file exists
             if os.path.isfile(file_path):
-                
-                # Create a simple GUI window
-                root = tk.Tk()
-                root.withdraw()  # Hide the main window
 
-                # Prompt the user for confirmation
+                root = tk.Tk() #popup
+                root.withdraw() 
                 confirm = messagebox.askyesno("Delete File", f"Do you want to delete the file '{file_path}'?")
-                
                 if confirm:
                     os.remove(file_path)
                     messagebox.showinfo("Deleted", f"File '{file_path}' has been deleted.")
@@ -145,13 +159,14 @@ class AntiVirusApp:
             else:
                 print(f"File '{file_path}' does not exist.")
 
+
         if file_hash in virus_signatures:
             return True
             check_and_delete_file(file_path)
         else:
             return False
 
-    # def update_virus_definitions(self):
+
     def scan_file(self):
         file_path = self.file_path.get()
         if not os.path.isfile(file_path):
@@ -162,12 +177,14 @@ class AntiVirusApp:
         file_type = self.identify_file_type(file_path)
         self.status_var.set(f"Scanning file: {file_path} ({file_type})")
 
+
         if self.check_for_virus_signatures(file_path):
             self.status_var.set(f"Virus detected in {file_path}!")
             messagebox.showerror("Virus Detected", f"Virus detected in {file_path}!")
         else:
             self.status_var.set(f"{file_path} is clean.")
             messagebox.showinfo("Scan Complete", f"{file_path} is clean.")
+
 
 def main():
     root = tk.Tk()
