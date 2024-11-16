@@ -120,10 +120,34 @@ class AntiVirusApp:
 
     def check_for_virus_signatures(self, file_path):
         file_hash = self.get_file_hashes(file_path)
-        virus_signatures = ['f5c34a6757804a619a99a1ba73ba51ba25a158e5ee6e9cc86a2be1292064e415', 'd2097c734fa39a904796dc832946d5c23f400c7a','6af7bb44c8e6e041bf2ee6b7a60d9ab3','2eabe9054cad5152567f0699947a2c5b','6b1d37510f2465cd2931c4814b85f21115dda4c6694667c734142e03235917ae']  # Replace with actual virus signatures
+        with open('hashes.txt', 'r') as file:
+            lines = file.readlines()
+        virus_signatures = [line.strip() for line in lines]
+
+        #virus_signatures = ['f5c34a6757804a619a99a1ba73ba51ba25a158e5ee6e9cc86a2be1292064e415', 'd2097c734fa39a904796dc832946d5c23f400c7a','6af7bb44c8e6e041bf2ee6b7a60d9ab3','2eabe9054cad5152567f0699947a2c5b','6b1d37510f2465cd2931c4814b85f21115dda4c6694667c734142e03235917ae']  # Replace with actual virus signatures
+
+        def check_and_delete_file(file_path):
+            # Check if the file exists
+            if os.path.isfile(file_path):
+                
+                # Create a simple GUI window
+                root = tk.Tk()
+                root.withdraw()  # Hide the main window
+
+                # Prompt the user for confirmation
+                confirm = messagebox.askyesno("Delete File", f"Do you want to delete the file '{file_path}'?")
+                
+                if confirm:
+                    os.remove(file_path)
+                    messagebox.showinfo("Deleted", f"File '{file_path}' has been deleted.")
+                else:
+                    messagebox.showinfo("Canceled", "File deletion canceled.")
+            else:
+                print(f"File '{file_path}' does not exist.")
 
         if file_hash in virus_signatures:
             return True
+            check_and_delete_file(file_path)
         else:
             return False
 
