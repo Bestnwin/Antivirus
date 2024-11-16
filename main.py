@@ -152,19 +152,6 @@ class AntiVirusApp:
             return False
 
     # def update_virus_definitions(self):
-    #     try:
-    #         response = requests.get('https://example.com/virus_definitions.txt')
-    #         if response.status_code == 200:
-    #             virus_definitions = response.text.split('\n')
-    #             self.status_var.set("Virus definitions updated successfully.")
-    #             messagebox.showinfo("Update Successful", "Virus definitions updated successfully.")
-    #         else:
-    #             self.status_var.set("Failed to update virus definitions.")
-    #             messagebox.showerror("Update Failed", "Failed to update virus definitions.")
-    #     except requests.exceptions.RequestException as e:
-    #         self.status_var.set(f"Error updating virus definitions: {e}")
-    #         messagebox.showerror("Update Error", f"Error updating virus definitions: {e}")
-
     def scan_file(self):
         file_path = self.file_path.get()
         if not os.path.isfile(file_path):
