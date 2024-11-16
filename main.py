@@ -162,8 +162,9 @@ class AntiVirusApp:
 
         if file_hash in virus_signatures:       #check if it is clean or not
             return True
-            check_and_delete_file(file_path)
+            
         else:
+            check_and_delete_file(file_path)
             return False
 
 
