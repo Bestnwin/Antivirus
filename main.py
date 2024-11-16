@@ -9,45 +9,99 @@ from tkinter import filedialog, messagebox, ttk
 class AntiVirusApp:
     def __init__(self, master):
         self.master = master
-        master.title("AntiVirus")
-        master.geometry("400x300")
-        master.resizable(False, False)
-
-        self.style = ttk.Style()
-        self.style.theme_use("clam")
+        self.master.title("AntiVirus scanner")
+        self.master.geometry("600x400")
+        self.master.configure(bg="#dbeeff") #background
 
         self.create_widgets()
 
     def create_widgets(self):
-        # Banner
-        banner = pyfiglet.figlet_format("AntiVirus", font="small")
-        banner_label = tk.Label(self.master, text=banner, font=("Courier", 8))
-        banner_label.pack(pady=10)
+        
+        antivirus_logo = "Antivirus"
+        antivirus_logo_label = tk.Label(self.master, text=antivirus_logo, font=("Helvetica", 48, "bold"), bg="#dbeeff", fg="#0026ff")
+        antivirus_logo_label.pack(pady=20)
 
-        # File selection
+        # File selection frame
         file_frame = ttk.Frame(self.master)
-        file_frame.pack(pady=10)
+        file_frame.pack(pady=20)
 
         self.file_path = tk.StringVar()
-        file_entry = ttk.Entry(file_frame, textvariable=self.file_path, width=40)
+        file_entry = ttk.Entry(file_frame, textvariable=self.file_path, font=("Helvetica", 12), width=30)
         file_entry.grid(row=0, column=0, padx=5)
 
         browse_button = ttk.Button(file_frame, text="Browse", command=self.browse_file)
         browse_button.grid(row=0, column=1, padx=5)
 
+        file_entry = tk.Entry(
+            file_frame,
+            textvariable=self.file_path,
+            font=("Helvetica", 14),
+            width=40,
+            bg="white",
+            fg="#555555",
+            relief="flat",
+            insertbackground="#0026ff"  # Cursor color
+        )
+        file_entry.grid(row=0, column=0, padx=10, pady=5, ipadx=8, ipady=8)
+
+        # Browse button with hover effects
+        browse_button = tk.Button(
+            file_frame,
+            text="Browse",
+            font=("Helvetica", 12, "bold"),
+            bg="#0099ff",
+            fg="white",
+            activebackground="#005bb5",
+            activeforeground="white",
+            relief="flat",
+            command=self.browse_file,
+        )
+        browse_button.grid(row=0, column=1, padx=5, ipadx=15, ipady=5)
+
+        def on_browse_hover(event):
+            browse_button.config(bg="#007acc")
+
+        def on_browse_leave(event):
+            browse_button.config(bg="#0099ff")
+
+        browse_button.bind("<Enter>", on_browse_hover)
+        browse_button.bind("<Leave>", on_browse_leave)
+
         # Scan button
-        scan_button = ttk.Button(self.master, text="Scan File", command=self.scan_file)
-        scan_button.pack(pady=10)
+        scan_button = tk.Button(
+            self.master,
+            text="Scan File",
+            font=("Helvetica", 16, "bold"),
+            bg="#0099ff",
+            fg="white",
+            activebackground="#005bb5",
+            activeforeground="white",
+            relief="flat",
+            width=15,
+            height=2,
+            command=self.scan_file,
+        )
+        scan_button.pack(pady=20)
 
-        # Update definitions button
-       # update_button = ttk.Button(self.master, text="Update Virus Definitions", command=self.update_virus_definitions)
-       # update_button.pack(pady=10)
-
-        # Status
+        # Status label
         self.status_var = tk.StringVar()
-        self.status_var.set("Ready")
-        status_label = ttk.Label(self.master, textvariable=self.status_var)
-        status_label.pack(pady=10)
+        self.status_var.set("ready")
+        status_label = tk.Label(self.master, textvariable=self.status_var, font=("Helvetica", 14), bg="#dbeeff", fg="#0099ff")
+        status_label.pack(pady=20)
+        
+    def animate_logo(self):
+        # Create animated antivirus_logo text
+        logo_frames = pyfiglet.figlet_format("AntiVirus", font="big").split("\n")
+        self.current_frame = 0
+
+        def update_frame():
+            if self.current_frame < len(logo_frames):
+                self.canvas.itemconfig(self.logo_text, text="\n".join(logo_frames[: self.current_frame + 1]))
+                self.current_frame += 1
+                self.master.after(200, update_frame)  # Delay between frames
+
+        update_frame()
+
 
     def browse_file(self):
         file_path = filedialog.askopenfilename()
