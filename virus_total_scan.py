@@ -61,7 +61,7 @@ def write_report_to_file(report, file_name="report.json"):
 
 # Main function
 def main():
-    file_path = "D:\\sqlite\\sqldiff.exe"  # Replace with your file path
+    file_path = r"c:\Users\akshi\Downloads\bestnwin_logo.jpg"  # Replace with your file path
 
     # Step 1: Calculate the file hash
     print(f"Calculating SHA-256 hash for file: {file_path}")
