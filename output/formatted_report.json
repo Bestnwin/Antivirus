@@ -1,323 +1,19 @@
 {
     "data": {
-        "id": "24d4655fde07743257cc18f7ebb4ca66dee9be7267778fa2db810e5a68edf4f9",
+        "id": "88185aff2d2dcc9c102136383387317c31b5e277ec572acfe7cc4601a012b889",
         "type": "file",
         "links": {
-            "self": "https://www.virustotal.com/api/v3/files/24d4655fde07743257cc18f7ebb4ca66dee9be7267778fa2db810e5a68edf4f9"
+            "self": "https://www.virustotal.com/api/v3/files/88185aff2d2dcc9c102136383387317c31b5e277ec572acfe7cc4601a012b889"
         },
         "attributes": {
-            "tlsh": "T196068C5AA3B801DAD1B7C17E864B4757EBB274060720ABDF15D4C6A52F13EE21EBE310",
-            "packers": {
-                "PEiD": "Microsoft Visual C++ 8.0 [Debug]"
+            "filecondis": {
+                "dhash": "603c3d1c1e2e0540",
+                "raw_md5": "430da4365e4e8e18cf5f4c0cfe76bbcf"
             },
-            "ssdeep": "49152:AYbW0eXBNZq8DZFqAJnAJEvwDLwDF0YIxhliktfoITptyYIp:A3XBbFsqFVKxhvjTptz",
-            "last_submission_date": 1731852440,
-            "meaningful_name": "sqlite3",
-            "detectiteasy": {
-                "filetype": "PE64",
-                "values": [
-                    {
-                        "info": "C",
-                        "version": "19.36.32822",
-                        "type": "Compiler",
-                        "name": "Microsoft Visual C/C++"
-                    },
-                    {
-                        "version": "14.36.32822",
-                        "type": "Linker",
-                        "name": "Microsoft Linker"
-                    },
-                    {
-                        "version": "2022 version 17.6",
-                        "type": "Tool",
-                        "name": "Visual Studio"
-                    }
-                ]
-            },
-            "magika": "PEBIN",
-            "last_analysis_date": 1731852440,
-            "pe_info": {
-                "timestamp": 1710242937,
-                "imphash": "ef20b0ad5a7f93a6be4a9f95b83082a3",
-                "machine_type": 34404,
-                "entry_point": 14946,
-                "resource_details": [
-                    {
-                        "lang": "ENGLISH US",
-                        "chi2": 151912.94,
-                        "filetype": "unknown",
-                        "entropy": 2.7822558879852295,
-                        "sha256": "7c5b24e3d8e4744de90ae5a154273dc19623d6082175466c92c0d038ad810dad",
-                        "type": "RT_ICON"
-                    },
-                    {
-                        "lang": "ENGLISH US",
-                        "chi2": 1848.8,
-                        "filetype": "ICO",
-                        "entropy": 1.819240689277649,
-                        "sha256": "494e4fd717fa1ee0c5c7bb3b4e28fdab4b7f6e95b4f9865f5ab86f03f62ae62c",
-                        "type": "RT_GROUP_ICON"
-                    },
-                    {
-                        "lang": "ENGLISH US",
-                        "chi2": 83012.92,
-                        "filetype": "unknown",
-                        "entropy": 3.548013210296631,
-                        "sha256": "74fbba2049490b3f6b0816214a5d04bdbd8ee9c1defd8a37eaf539e62b995d6d",
-                        "type": "RT_VERSION"
-                    }
-                ],
-                "resource_langs": {
-                    "ENGLISH US": 3
-                },
-                "resource_types": {
-                    "RT_ICON": 1,
-                    "RT_VERSION": 1,
-                    "RT_GROUP_ICON": 1
-                },
-                "sections": [
-                    {
-                        "name": ".text",
-                        "chi2": 48703112.0,
-                        "virtual_address": 4096,
-                        "entropy": 5.86,
-                        "raw_size": 3046400,
-                        "flags": "rx",
-                        "virtual_size": 3046298,
-                        "md5": "849b8a598934fd600fe391366c3b979d"
-                    },
-                    {
-                        "name": ".rdata",
-                        "chi2": 20009802.0,
-                        "virtual_address": 3051520,
-                        "entropy": 5.2,
-                        "raw_size": 488448,
-                        "flags": "r",
-                        "virtual_size": 488198,
-                        "md5": "438c443ac1687c8f396ed7f4bb14d055"
-                    },
-                    {
-                        "name": ".data",
-                        "chi2": 4726539.0,
-                        "virtual_address": 3543040,
-                        "entropy": 3.08,
-                        "raw_size": 41472,
-                        "flags": "rw",
-                        "virtual_size": 90960,
-                        "md5": "cb5f85383a033d21a070b994d383accb"
-                    },
-                    {
-                        "name": ".pdata",
-                        "chi2": 3408200.5,
-                        "virtual_address": 3637248,
-                        "entropy": 5.96,
-                        "raw_size": 123904,
-                        "flags": "r",
-                        "virtual_size": 123564,
-                        "md5": "222bfaa0a306437e4013bfa5719f4f5c"
-                    },
-                    {
-                        "name": ".idata",
-                        "chi2": 451576.28,
-                        "virtual_address": 3764224,
-                        "entropy": 3.98,
-                        "raw_size": 7168,
-                        "flags": "r",
-                        "virtual_size": 6727,
-                        "md5": "aec9fc2749bb52acd8b5f5820216deca"
-                    },
-                    {
-                        "name": ".00cfg",
-                        "chi2": 118606.0,
-                        "virtual_address": 3772416,
-                        "entropy": 0.41,
-                        "raw_size": 512,
-                        "flags": "r",
-                        "virtual_size": 373,
-                        "md5": "766b56c02e7a66940ea8418764accb09"
-                    },
-                    {
-                        "name": "_RDATA",
-                        "chi2": 148168.0,
-                        "virtual_address": 3776512,
-                        "entropy": 1.97,
-                        "raw_size": 1024,
-                        "flags": "r",
-                        "virtual_size": 671,
-                        "md5": "1442c2e5129d14c6a0931149766e2706"
-                    },
-                    {
-                        "name": ".rsrc",
-                        "chi2": 585180.94,
-                        "virtual_address": 3780608,
-                        "entropy": 2.57,
-                        "raw_size": 5120,
-                        "flags": "r",
-                        "virtual_size": 4812,
-                        "md5": "6ba8e2b5af732c523557a67075e7aefd"
-                    },
-                    {
-                        "name": ".reloc",
-                        "chi2": 1832577.12,
-                        "virtual_address": 3788800,
-                        "entropy": 3.0,
-                        "raw_size": 18432,
-                        "flags": "r",
-                        "virtual_size": 17945,
-                        "md5": "e205fdf4f3a8b9c3280633312a0728a2"
-                    }
-                ],
-                "compiler_product_versions": [
-                    "[---] Unmarked objects count=157",
-                    "[ C ] VS2022 v17.7.0 build 32822 count=12",
-                    "[RES] VS2022 v17.7.0 build 32822 count=1",
-                    "[LNK] VS2022 v17.7.0 build 32822 count=1",
-                    "id: 0x103, version: 30795 count=21",
-                    "id: 0x105, version: 30795 count=200",
-                    "id: 0x104, version: 30795 count=33",
-                    "id: 0x101, version: 30795 count=3",
-                    "id: 0x105, version: 32533 count=41",
-                    "id: 0x104, version: 32533 count=18",
-                    "id: 0x103, version: 32533 count=10"
-                ],
-                "rich_pe_header_hash": "8767c69700c7f1a651fef9a0fe690a7b",
-                "import_list": [
-                    {
-                        "library_name": "KERNEL32.dll",
-                        "imported_functions": [
-                            "AreFileApisANSI",
-                            "CloseHandle",
-                            "CompareStringW",
-                            "CreateDirectoryW",
-                            "CreateFileA",
-                            "CreateFileMappingW",
-                            "CreateFileW",
-                            "CreateMutexW",
-                            "CreatePipe",
-                            "CreateProcessW",
-                            "CreateThread",
-                            "DebugBreak",
-                            "DeleteCriticalSection",
-                            "DeleteFileA",
-                            "DeleteFileW",
-                            "DuplicateHandle",
-                            "EncodePointer",
-                            "EnterCriticalSection",
-                            "EnumSystemLocalesW",
-                            "ExitProcess",
-                            "ExitThread",
-                            "FileTimeToSystemTime",
-                            "FindClose",
-                            "FindFirstFileExW",
-                            "FindFirstFileW",
-                            "FindNextFileW",
-                            "FlsAlloc",
-                            "FlsFree",
-                            "FlsGetValue",
-                            "FlsSetValue",
-                            "FlushFileBuffers",
-                            "FlushViewOfFile",
-                            "FormatMessageA",
-                            "FormatMessageW",
-                            "FreeEnvironmentStringsW",
-                            "FreeLibrary",
-                            "FreeLibraryAndExitThread",
-                            "GetACP",
-                            "GetCommandLineA",
-                            "GetCommandLineW",
-                            "GetConsoleMode",
-                            "GetConsoleOutputCP",
-                            "GetConsoleScreenBufferInfo",
-                            "GetCPInfo",
-                            "GetCurrentDirectoryW",
-                            "GetCurrentProcess",
-                            "GetCurrentProcessId",
-                            "GetCurrentThread",
-                            "GetCurrentThreadId",
-                            "GetDateFormatW",
-                            "GetDiskFreeSpaceA",
-                            "GetDiskFreeSpaceW",
-                            "GetDriveTypeW",
-                            "GetEnvironmentStringsW",
-                            "GetEnvironmentVariableA",
-                            "GetExitCodeProcess",
-                            "GetFileAttributesA",
-                            "GetFileAttributesExW",
-                            "GetFileAttributesW",
-                            "GetFileInformationByHandle",
-                            "GetFileSize",
-                            "GetFileSizeEx",
-                            "GetFileType",
-                            "GetFullPathNameA",
-                            "GetFullPathNameW",
-                            "GetLastError",
-                            "GetLocaleInfoW",
-                            "GetModuleFileNameW",
-                            "GetModuleHandleExW",
-                            "GetModuleHandleW",
-                            "GetOEMCP",
-                            "GetProcAddress",
-                            "GetProcessHeap",
-                            "GetStartupInfoW",
-                            "GetStdHandle",
-                            "GetStringTypeW",
-                            "GetSystemInfo",
-                            "GetSystemTime",
-                            "GetSystemTimeAsFileTime",
-                            "GetTempPathA",
-                            "GetTempPathW",
-                            "GetTickCount",
-                            "GetTimeFormatW",
-                            "GetTimeZoneInformation",
-                            "GetUserDefaultLCID",
-                            "HeapAlloc",
-                            "HeapCompact",
-                            "HeapCreate",
-                            "HeapDestroy",
-                            "HeapFree",
-                            "HeapReAlloc",
-                            "HeapSize",
-                            "HeapValidate",
-                            "InitializeCriticalSection",
-                            "InitializeCriticalSectionAndSpinCount",
-                            "InitializeSListHead",
-                            "InterlockedFlushSList",
-                            "InterlockedPushEntrySList",
-                            "IsDebuggerPresent",
-                            "IsProcessorFeaturePresent",
-                            "IsValidCodePage",
-                            "IsValidLocale",
-                            "LCMapStringW",
-                            "LeaveCriticalSection",
-                            "LoadLibraryA",
-                            "LoadLibraryExW",
-                            "LoadLibraryW",
-                            "LocalFree",
-                            "LockFile",
-                            "LockFileEx",
-                            "MapViewOfFile",
-                            "MultiByteToWideChar",
-                            "OutputDebugStringA",
-                            "OutputDebugStringW",
-                            "PeekNamedPipe",
-                            "QueryPerformanceCounter",
-                            "RaiseException",
-                            "ReadConsoleW",
-                            "ReadFile",
-                            "ResumeThread",
-                            "RtlCaptureContext",
-                            "RtlLookupFunctionEntry",
-                            "RtlPcToFileHeader",
-                            "RtlUnwind",
-                            "RtlUnwindEx",
-                            "RtlVirtualUnwind",
-                            "SetConsoleCtrlHandler",
-                            "SetConsoleMode"
-                        ]
-                    }
-                ]
-            },
-            "authentihash": "c2ce645d407fc3f945508927f961993dc834783f571a235ac0bacf772eaf23c7",
+            "sha256": "88185aff2d2dcc9c102136383387317c31b5e277ec572acfe7cc4601a012b889",
+            "sha1": "1c2dbebace9364b0078f0bd6d17dfdb732c121f3",
+            "first_submission_date": 1710245757,
+            "type_description": "Win32 EXE",
             "last_analysis_results": {
                 "Bkav": {
                     "method": "blacklist",
@@ -335,11 +31,19 @@
                     "category": "undetected",
                     "result": null
                 },
-                "Elastic": {
+                "AVG": {
                     "method": "blacklist",
-                    "engine_name": "Elastic",
-                    "engine_version": "4.0.173",
-                    "engine_update": "20241106",
+                    "engine_name": "AVG",
+                    "engine_version": "23.9.8494.0",
+                    "engine_update": "20241117",
+                    "category": "undetected",
+                    "result": null
+                },
+                "tehtris": {
+                    "method": "blacklist",
+                    "engine_name": "tehtris",
+                    "engine_version": "v0.1.4",
+                    "engine_update": "20241117",
                     "category": "undetected",
                     "result": null
                 },
@@ -383,11 +87,11 @@
                     "category": "undetected",
                     "result": null
                 },
-                "Cylance": {
+                "Malwarebytes": {
                     "method": "blacklist",
-                    "engine_name": "Cylance",
-                    "engine_version": "3.0.0.0",
-                    "engine_update": "20241114",
+                    "engine_name": "Malwarebytes",
+                    "engine_version": "4.5.5.54",
+                    "engine_update": "20241117",
                     "category": "undetected",
                     "result": null
                 },
@@ -439,6 +143,14 @@
                     "category": "undetected",
                     "result": null
                 },
+                "huorong": {
+                    "method": "blacklist",
+                    "engine_name": "huorong",
+                    "engine_version": "d7066ad:d7066ad:75689d4:75689d4",
+                    "engine_update": "20241117",
+                    "category": "undetected",
+                    "result": null
+                },
                 "Baidu": {
                     "method": "blacklist",
                     "engine_name": "Baidu",
@@ -463,11 +175,11 @@
                     "category": "undetected",
                     "result": null
                 },
-                "tehtris": {
+                "Elastic": {
                     "method": "blacklist",
-                    "engine_name": "tehtris",
-                    "engine_version": "v0.1.4",
-                    "engine_update": "20241117",
+                    "engine_name": "Elastic",
+                    "engine_version": "4.0.173",
+                    "engine_update": "20241106",
                     "category": "undetected",
                     "result": null
                 },
@@ -479,19 +191,19 @@
                     "category": "undetected",
                     "result": null
                 },
+                "Cynet": {
+                    "method": "blacklist",
+                    "engine_name": "Cynet",
+                    "engine_version": "4.0.1.1",
+                    "engine_update": "20241117",
+                    "category": "undetected",
+                    "result": null
+                },
                 "APEX": {
                     "method": "blacklist",
                     "engine_name": "APEX",
                     "engine_version": "6.592",
                     "engine_update": "20241116",
-                    "category": "undetected",
-                    "result": null
-                },
-                "TrendMicro-HouseCall": {
-                    "method": "blacklist",
-                    "engine_name": "TrendMicro-HouseCall",
-                    "engine_version": "10.0.0.1040",
-                    "engine_update": "20241117",
                     "category": "undetected",
                     "result": null
                 },
@@ -615,14 +327,6 @@
                     "category": "undetected",
                     "result": null
                 },
-                "SentinelOne": {
-                    "method": "blacklist",
-                    "engine_name": "SentinelOne",
-                    "engine_version": "24.2.1.1",
-                    "engine_update": "20240417",
-                    "category": "undetected",
-                    "result": null
-                },
                 "Trapmine": {
                     "method": "blacklist",
                     "engine_name": "Trapmine",
@@ -679,10 +383,10 @@
                     "category": "undetected",
                     "result": null
                 },
-                "Google": {
+                "Varist": {
                     "method": "blacklist",
-                    "engine_name": "Google",
-                    "engine_version": "1731846637",
+                    "engine_name": "Varist",
+                    "engine_version": "6.6.1.3",
                     "engine_update": "20241117",
                     "category": "undetected",
                     "result": null
@@ -691,14 +395,6 @@
                     "method": "blacklist",
                     "engine_name": "Avira",
                     "engine_version": "8.3.3.20",
-                    "engine_update": "20241117",
-                    "category": "undetected",
-                    "result": null
-                },
-                "Varist": {
-                    "method": "blacklist",
-                    "engine_name": "Varist",
-                    "engine_version": "6.6.1.3",
                     "engine_update": "20241117",
                     "category": "undetected",
                     "result": null
@@ -767,10 +463,10 @@
                     "category": "undetected",
                     "result": null
                 },
-                "Cynet": {
+                "Google": {
                     "method": "blacklist",
-                    "engine_name": "Cynet",
-                    "engine_version": "4.0.1.1",
+                    "engine_name": "Google",
+                    "engine_version": "1731846637",
                     "engine_update": "20241117",
                     "category": "undetected",
                     "result": null
@@ -815,11 +511,11 @@
                     "category": "undetected",
                     "result": null
                 },
-                "Malwarebytes": {
+                "Cylance": {
                     "method": "blacklist",
-                    "engine_name": "Malwarebytes",
-                    "engine_version": "4.5.5.54",
-                    "engine_update": "20241117",
+                    "engine_name": "Cylance",
+                    "engine_version": "3.0.0.0",
+                    "engine_update": "20241114",
                     "category": "undetected",
                     "result": null
                 },
@@ -831,10 +527,10 @@
                     "category": "undetected",
                     "result": null
                 },
-                "Zoner": {
+                "TrendMicro-HouseCall": {
                     "method": "blacklist",
-                    "engine_name": "Zoner",
-                    "engine_version": "2.2.2.0",
+                    "engine_name": "TrendMicro-HouseCall",
+                    "engine_version": "10.0.0.1040",
                     "engine_update": "20241117",
                     "category": "undetected",
                     "result": null
@@ -855,11 +551,11 @@
                     "category": "undetected",
                     "result": null
                 },
-                "huorong": {
+                "SentinelOne": {
                     "method": "blacklist",
-                    "engine_name": "huorong",
-                    "engine_version": "d7066ad:d7066ad:75689d4:75689d4",
-                    "engine_update": "20241117",
+                    "engine_name": "SentinelOne",
+                    "engine_version": "24.2.1.1",
+                    "engine_update": "20240417",
                     "category": "undetected",
                     "result": null
                 },
@@ -879,10 +575,10 @@
                     "category": "undetected",
                     "result": null
                 },
-                "AVG": {
+                "Zoner": {
                     "method": "blacklist",
-                    "engine_name": "AVG",
-                    "engine_version": "23.9.8494.0",
+                    "engine_name": "Zoner",
+                    "engine_version": "2.2.2.0",
                     "engine_update": "20241117",
                     "category": "undetected",
                     "result": null
@@ -903,10 +599,10 @@
                     "category": "undetected",
                     "result": null
                 },
-                "Trustlook": {
+                "Avast-Mobile": {
                     "method": "blacklist",
-                    "engine_name": "Trustlook",
-                    "engine_version": "1.0",
+                    "engine_name": "Avast-Mobile",
+                    "engine_version": "241117-00",
                     "engine_update": "20241117",
                     "category": "type-unsupported",
                     "result": null
@@ -927,59 +623,21 @@
                     "category": "type-unsupported",
                     "result": null
                 },
-                "Avast-Mobile": {
+                "Trustlook": {
                     "method": "blacklist",
-                    "engine_name": "Avast-Mobile",
-                    "engine_version": "241117-00",
+                    "engine_name": "Trustlook",
+                    "engine_version": "1.0",
                     "engine_update": "20241117",
                     "category": "type-unsupported",
                     "result": null
                 }
             },
-            "first_seen_itw_date": 1710268136,
-            "times_submitted": 61,
-            "tags": [
-                "64bits",
-                "idle",
-                "peexe",
-                "detect-debug-environment"
-            ],
-            "filecondis": {
-                "dhash": "20383c1c1e2e0540",
-                "raw_md5": "561f266fd09e6253118afd0f51fbeb59"
-            },
+            "md5": "16fff7b5272ead04ccb52fa30fc12538",
+            "last_analysis_date": 1731853377,
+            "tlsh": "T131E57C5BB3B811D9D167C17E8A0A4757E7B1B4051722A7DF05A0C6B92F23EE70ABE310",
             "type_extension": "exe",
-            "size": 3733504,
-            "first_submission_date": 1710245757,
-            "reputation": 0,
-            "last_analysis_stats": {
-                "malicious": 0,
-                "suspicious": 0,
-                "undetected": 73,
-                "harmless": 0,
-                "timeout": 0,
-                "confirmed-timeout": 0,
-                "failure": 0,
-                "type-unsupported": 4
-            },
-            "md5": "b7dc3aa25186144f33a92e71456f63c2",
-            "names": [
-                "sqlite3.exe",
-                "sqlite3",
-                "b79d86435dabc23ef9d3a729ee4272ec64b5ad67",
-                "is-0727V.tmp"
-            ],
-            "last_modification_date": 1731852497,
+            "unique_sources": 20,
             "type_tag": "peexe",
-            "type_description": "Win32 EXE",
-            "magic": "PE32+ executable (console) x86-64, for MS Windows",
-            "type_tags": [
-                "executable",
-                "windows",
-                "win32",
-                "pe",
-                "peexe"
-            ],
             "sandbox_verdicts": {
                 "Zenbox": {
                     "category": "harmless",
@@ -997,32 +655,315 @@
                     "sandbox_name": "C2AE"
                 }
             },
-            "creation_date": 1710242937,
-            "trid": [
-                {
-                    "file_type": "Windows Control Panel Item (generic)",
-                    "probability": 72.7
+            "authentihash": "0340eef29e42b0db481da1890aaeec29b67521b4176a4d46e45f81658311115a",
+            "last_analysis_stats": {
+                "malicious": 0,
+                "suspicious": 0,
+                "undetected": 73,
+                "harmless": 0,
+                "timeout": 0,
+                "confirmed-timeout": 0,
+                "failure": 0,
+                "type-unsupported": 4
+            },
+            "pe_info": {
+                "timestamp": 1710242950,
+                "imphash": "49e99090ec6971c040a4a4748001e4bd",
+                "machine_type": 34404,
+                "entry_point": 13721,
+                "resource_details": [
+                    {
+                        "lang": "ENGLISH US",
+                        "chi2": 151912.94,
+                        "filetype": "unknown",
+                        "entropy": 2.7822558879852295,
+                        "sha256": "7c5b24e3d8e4744de90ae5a154273dc19623d6082175466c92c0d038ad810dad",
+                        "type": "RT_ICON"
+                    },
+                    {
+                        "lang": "ENGLISH US",
+                        "chi2": 1848.8,
+                        "filetype": "ICO",
+                        "entropy": 1.819240689277649,
+                        "sha256": "494e4fd717fa1ee0c5c7bb3b4e28fdab4b7f6e95b4f9865f5ab86f03f62ae62c",
+                        "type": "RT_GROUP_ICON"
+                    },
+                    {
+                        "lang": "ENGLISH US",
+                        "chi2": 83012.92,
+                        "filetype": "unknown",
+                        "entropy": 3.548013210296631,
+                        "sha256": "74fbba2049490b3f6b0816214a5d04bdbd8ee9c1defd8a37eaf539e62b995d6d",
+                        "type": "RT_VERSION"
+                    }
+                ],
+                "resource_langs": {
+                    "ENGLISH US": 3
                 },
-                {
-                    "file_type": "Win64 Executable (generic)",
-                    "probability": 13.2
+                "resource_types": {
+                    "RT_ICON": 1,
+                    "RT_VERSION": 1,
+                    "RT_GROUP_ICON": 1
                 },
-                {
-                    "file_type": "Win16 NE executable (generic)",
-                    "probability": 6.3
-                },
-                {
-                    "file_type": "OS/2 Executable (generic)",
-                    "probability": 2.5
-                },
-                {
-                    "file_type": "Generic Win/DOS Executable",
-                    "probability": 2.5
-                }
+                "sections": [
+                    {
+                        "name": ".text",
+                        "chi2": 41046592.0,
+                        "virtual_address": 4096,
+                        "entropy": 5.85,
+                        "raw_size": 2557952,
+                        "flags": "rx",
+                        "virtual_size": 2557940,
+                        "md5": "a7a4a04c22d47272f132a29f2a2f4e0f"
+                    },
+                    {
+                        "name": ".rdata",
+                        "chi2": 17108006.0,
+                        "virtual_address": 2564096,
+                        "entropy": 5.06,
+                        "raw_size": 368640,
+                        "flags": "r",
+                        "virtual_size": 368142,
+                        "md5": "9688c1e3c38deb83f87952c0ceda87b7"
+                    },
+                    {
+                        "name": ".data",
+                        "chi2": 4261471.0,
+                        "virtual_address": 2932736,
+                        "entropy": 3.03,
+                        "raw_size": 36352,
+                        "flags": "rw",
+                        "virtual_size": 46113,
+                        "md5": "699ab1087cd9613fdb98b1e6155edf35"
+                    },
+                    {
+                        "name": ".pdata",
+                        "chi2": 2925580.0,
+                        "virtual_address": 2981888,
+                        "entropy": 5.93,
+                        "raw_size": 104960,
+                        "flags": "r",
+                        "virtual_size": 104472,
+                        "md5": "63c5a9478783030b9f4dad8ef1f471ee"
+                    },
+                    {
+                        "name": ".idata",
+                        "chi2": 380584.44,
+                        "virtual_address": 3088384,
+                        "entropy": 3.97,
+                        "raw_size": 6144,
+                        "flags": "r",
+                        "virtual_size": 5908,
+                        "md5": "6850eab1981f402ec716ca31f32a607d"
+                    },
+                    {
+                        "name": ".00cfg",
+                        "chi2": 118606.0,
+                        "virtual_address": 3096576,
+                        "entropy": 0.41,
+                        "raw_size": 512,
+                        "flags": "r",
+                        "virtual_size": 373,
+                        "md5": "4a4d3d5b9b560effebb856a5c3790975"
+                    },
+                    {
+                        "name": "_RDATA",
+                        "chi2": 148168.0,
+                        "virtual_address": 3100672,
+                        "entropy": 1.97,
+                        "raw_size": 1024,
+                        "flags": "r",
+                        "virtual_size": 671,
+                        "md5": "4be3a6ec7a970ba8d46a6c68fc3dcd2a"
+                    },
+                    {
+                        "name": ".rsrc",
+                        "chi2": 585180.31,
+                        "virtual_address": 3104768,
+                        "entropy": 2.57,
+                        "raw_size": 5120,
+                        "flags": "r",
+                        "virtual_size": 4812,
+                        "md5": "ba3a707046c2ef2bdf0acdf3501afd07"
+                    },
+                    {
+                        "name": ".reloc",
+                        "chi2": 1449151.62,
+                        "virtual_address": 3112960,
+                        "entropy": 3.04,
+                        "raw_size": 14848,
+                        "flags": "r",
+                        "virtual_size": 14747,
+                        "md5": "766b2fa6bfedf0a67f496fd7dfdc43f4"
+                    }
+                ],
+                "compiler_product_versions": [
+                    "[---] Unmarked objects count=138",
+                    "[ C ] VS2022 v17.7.0 build 32822 count=3",
+                    "[RES] VS2022 v17.7.0 build 32822 count=1",
+                    "[LNK] VS2022 v17.7.0 build 32822 count=1",
+                    "id: 0x103, version: 30795 count=20",
+                    "id: 0x105, version: 30795 count=164",
+                    "id: 0x104, version: 30795 count=33",
+                    "id: 0x101, version: 30795 count=3",
+                    "id: 0x105, version: 32533 count=40",
+                    "id: 0x104, version: 32533 count=16",
+                    "id: 0x103, version: 32533 count=10"
+                ],
+                "rich_pe_header_hash": "56567985c5e8492a651fc6b68f42db25",
+                "import_list": [
+                    {
+                        "library_name": "KERNEL32.dll",
+                        "imported_functions": [
+                            "AreFileApisANSI",
+                            "CloseHandle",
+                            "CompareStringW",
+                            "CreateFileA",
+                            "CreateFileMappingW",
+                            "CreateFileW",
+                            "CreateMutexW",
+                            "CreateThread",
+                            "DeleteCriticalSection",
+                            "DeleteFileA",
+                            "DeleteFileW",
+                            "EncodePointer",
+                            "EnterCriticalSection",
+                            "EnumSystemLocalesW",
+                            "ExitProcess",
+                            "ExitThread",
+                            "FindClose",
+                            "FindFirstFileExW",
+                            "FindNextFileW",
+                            "FlsAlloc",
+                            "FlsFree",
+                            "FlsGetValue",
+                            "FlsSetValue",
+                            "FlushFileBuffers",
+                            "FlushViewOfFile",
+                            "FormatMessageA",
+                            "FormatMessageW",
+                            "FreeEnvironmentStringsW",
+                            "FreeLibrary",
+                            "FreeLibraryAndExitThread",
+                            "GetACP",
+                            "GetCommandLineA",
+                            "GetCommandLineW",
+                            "GetConsoleMode",
+                            "GetConsoleOutputCP",
+                            "GetCPInfo",
+                            "GetCurrentProcess",
+                            "GetCurrentProcessId",
+                            "GetCurrentThread",
+                            "GetCurrentThreadId",
+                            "GetDateFormatW",
+                            "GetDiskFreeSpaceA",
+                            "GetDiskFreeSpaceW",
+                            "GetEnvironmentStringsW",
+                            "GetFileAttributesA",
+                            "GetFileAttributesExW",
+                            "GetFileAttributesW",
+                            "GetFileSize",
+                            "GetFileSizeEx",
+                            "GetFileType",
+                            "GetFullPathNameA",
+                            "GetFullPathNameW",
+                            "GetLastError",
+                            "GetLocaleInfoW",
+                            "GetModuleFileNameW",
+                            "GetModuleHandleExW",
+                            "GetModuleHandleW",
+                            "GetOEMCP",
+                            "GetProcAddress",
+                            "GetProcessHeap",
+                            "GetStartupInfoW",
+                            "GetStdHandle",
+                            "GetStringTypeW",
+                            "GetSystemInfo",
+                            "GetSystemTime",
+                            "GetSystemTimeAsFileTime",
+                            "GetTempPathA",
+                            "GetTempPathW",
+                            "GetTickCount",
+                            "GetTimeFormatW",
+                            "GetTimeZoneInformation",
+                            "GetUserDefaultLCID",
+                            "HeapAlloc",
+                            "HeapCompact",
+                            "HeapCreate",
+                            "HeapDestroy",
+                            "HeapFree",
+                            "HeapReAlloc",
+                            "HeapSize",
+                            "HeapValidate",
+                            "InitializeCriticalSection",
+                            "InitializeCriticalSectionAndSpinCount",
+                            "InitializeSListHead",
+                            "InterlockedFlushSList",
+                            "InterlockedPushEntrySList",
+                            "IsDebuggerPresent",
+                            "IsProcessorFeaturePresent",
+                            "IsValidCodePage",
+                            "IsValidLocale",
+                            "LCMapStringW",
+                            "LeaveCriticalSection",
+                            "LoadLibraryA",
+                            "LoadLibraryExW",
+                            "LoadLibraryW",
+                            "LocalFree",
+                            "LockFile",
+                            "LockFileEx",
+                            "MapViewOfFile",
+                            "MultiByteToWideChar",
+                            "OutputDebugStringA",
+                            "OutputDebugStringW",
+                            "QueryPerformanceCounter",
+                            "RaiseException",
+                            "ReadConsoleW",
+                            "ReadFile",
+                            "ResumeThread",
+                            "RtlCaptureContext",
+                            "RtlLookupFunctionEntry",
+                            "RtlPcToFileHeader",
+                            "RtlUnwind",
+                            "RtlUnwindEx",
+                            "RtlVirtualUnwind",
+                            "SetConsoleCtrlHandler",
+                            "SetConsoleMode",
+                            "SetEndOfFile",
+                            "SetEnvironmentVariableW",
+                            "SetFilePointer",
+                            "SetFilePointerEx",
+                            "SetLastError",
+                            "SetStdHandle",
+                            "SetUnhandledExceptionFilter",
+                            "Sleep",
+                            "SystemTimeToFileTime",
+                            "TerminateProcess",
+                            "TlsAlloc",
+                            "TlsFree",
+                            "TlsGetValue",
+                            "TlsSetValue"
+                        ]
+                    }
+                ]
+            },
+            "reputation": 0,
+            "ssdeep": "49152:EgGtRrdLJ1K2AQ0tifDEHFgSywBo5rL7rWfVwol1n8:Qbz3EjxBo5fKdl18",
+            "last_submission_date": 1731853377,
+            "meaningful_name": "sqlite3",
+            "packers": {
+                "PEiD": "Microsoft Visual C++ 8.0 [Debug]"
+            },
+            "size": 3096576,
+            "magic": "PE32+ executable (console) x86-64, for MS Windows",
+            "magika": "PEBIN",
+            "type_tags": [
+                "executable",
+                "windows",
+                "win32",
+                "pe",
+                "peexe"
             ],
-            "unique_sources": 47,
-            "vhash": "036096555d15551515151az9d!z",
-            "sha256": "24d4655fde07743257cc18f7ebb4ca66dee9be7267778fa2db810e5a68edf4f9",
             "signature_info": {
                 "product": "SQLite",
                 "description": "SQLite is a software library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine.",
@@ -1030,11 +971,67 @@
                 "file version": "3.45.2",
                 "internal name": "sqlite3"
             },
+            "creation_date": 1710242950,
+            "times_submitted": 30,
+            "trid": [
+                {
+                    "file_type": "Windows Control Panel Item (generic)",
+                    "probability": 70.8
+                },
+                {
+                    "file_type": "Win64 Executable (generic)",
+                    "probability": 12.9
+                },
+                {
+                    "file_type": "Win16 NE executable (generic)",
+                    "probability": 6.2
+                },
+                {
+                    "file_type": "Windows Icons Library (generic)",
+                    "probability": 2.5
+                },
+                {
+                    "file_type": "OS/2 Executable (generic)",
+                    "probability": 2.4
+                }
+            ],
+            "detectiteasy": {
+                "filetype": "PE64",
+                "values": [
+                    {
+                        "info": "C",
+                        "version": "19.36.32822",
+                        "type": "Compiler",
+                        "name": "Microsoft Visual C/C++"
+                    },
+                    {
+                        "version": "14.36.32822",
+                        "type": "Linker",
+                        "name": "Microsoft Linker"
+                    },
+                    {
+                        "version": "2022 version 17.6",
+                        "type": "Tool",
+                        "name": "Visual Studio"
+                    }
+                ]
+            },
+            "tags": [
+                "64bits",
+                "idle",
+                "detect-debug-environment",
+                "peexe"
+            ],
+            "names": [
+                "sqldiff.exe",
+                "sqlite3"
+            ],
             "total_votes": {
                 "harmless": 0,
                 "malicious": 0
             },
-            "sha1": "b79d86435dabc23ef9d3a729ee4272ec64b5ad67"
+            "last_modification_date": 1731853427,
+            "vhash": "036096555d15551515151az8a!z"
         }
     }
 }

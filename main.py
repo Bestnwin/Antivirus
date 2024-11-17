@@ -14,7 +14,7 @@ import pandas as pd
 
 
 # Your VirusTotal API key
-API_KEY = "583278add49d56c4f02caa49bf19e58e857aa59ba28fc1e437651c45620e4b72"  # Replace with your API key
+API_KEY = "ur api_key"  # Replace with your API key
 
 class AntiVirusApp:
     def __init__(self, master):
