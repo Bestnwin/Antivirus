@@ -10,6 +10,8 @@ import time
 import hashlib
 import requests
 import json
+import pandas as pd
+
 
 # Your VirusTotal API key
 API_KEY = "583278add49d56c4f02caa49bf19e58e857aa59ba28fc1e437651c45620e4b72"  # Replace with your API key
@@ -269,6 +271,36 @@ class AntiVirusApp:
             lines = file.readlines()
         virus_signatures = [line.strip() for line in lines]
         report=virus_total_report(file_path,file_hash)
+        # Extracting the `last_analysis_results`
+        results = report["data"]["attributes"]["last_analysis_results"]
+
+        # Converting to a pandas DataFrame for tabular representation
+        df = pd.DataFrame(results).T  # .T to transpose since we want keys as rows
+
+        # File paths
+        output_dir = "output"
+        os.makedirs(output_dir, exist_ok=True)
+        json_file_path = os.path.join(output_dir, "formatted_report.json")
+        table_file_path = os.path.join(output_dir, "last_analysis_results.txt")
+
+        # Save full JSON data in a formatted JSON file
+        with open(json_file_path, "w") as json_file:
+            json.dump(report, json_file, indent=4)
+
+        # Save the table to a text file
+        with open(table_file_path, "w") as table_file:
+            table_file.write(df.to_string(index=True))
+
+        # Display the table in Python
+        print("Analysis Results Table:")
+        print(df)
+
+        # Delete the table file after displaying it
+        os.remove(table_file_path)
+        print(f"Table file '{table_file_path}' deleted after displaying.")
+
+        # The JSON file is not deleted
+        print(f"Formatted JSON saved to {json_file_path}")
         
         def is_detected_from_report(report):
             # Iterate through the engines in the 'last_analysis_results' section
@@ -280,11 +312,10 @@ class AntiVirusApp:
 
 
         if file_hash in virus_signatures or is_detected_from_report(report):       #check if it is clean or not
+            return True
 
-            return report,True
-            
         else:
-            return report,False
+            return False
 
 
     def scan_file(self):
@@ -296,18 +327,16 @@ class AntiVirusApp:
 
         file_type = self.identify_file_type(file_path)                    
         self.status_var.set(f"Scanning file: {file_path} ({file_type})")
-        report,check=self.check_for_virus_signatures(file_path)
+        check=self.check_for_virus_signatures(file_path)
 
         if check:                                  #give pop up wether it is clean or not
             self.status_var.set(f"Virus detected in {file_path}!")
             messagebox.showerror("Virus Detected", f"Virus detected in {file_path}!")
-            messagebox.showinfo("Scan Complete", f"{report} is clean.")
             check_and_delete_file(file_path)
         else:
             self.status_var.set(f"{file_path} is clean.")
             messagebox.showinfo("Scan Complete", f"{file_path} is clean.")
-            messagebox.showinfo("Scan Complete", f"{report} is clean.")
-
+            
 
 def main():
     root = tk.Tk()
