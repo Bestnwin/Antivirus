@@ -1,87 +1,107 @@
-import requests
 import time
-import sys
+import hashlib
+import requests
+import json
 
-# Replace with your VirusTotal API key
-API_KEY = '583278add49d56c4f02caa49bf19e58e857aa59ba28fc1e437651c45620e4b72'
+# Your VirusTotal API key
+API_KEY = "583278add49d56c4f02caa49bf19e58e857aa59ba28fc1e437651c45620e4b72"  # Replace with your API key
 
-# Function to upload file to VirusTotal
-def upload_file(file_path):
+# Calculate the SHA-256 hash of a file
+def calculate_file_hash(file_path):
+    hash_function = hashlib.sha256()
+    with open(file_path, "rb") as file:
+        while chunk := file.read(8192):
+            hash_function.update(chunk)
+    return hash_function.hexdigest()
+
+# Upload a file to VirusTotal
+def upload_file_to_virustotal(file_path):
     url = "https://www.virustotal.com/api/v3/files"
-    headers = {
-        "x-apikey": API_KEY
-    }
-    with open(file_path, 'rb') as file:
-        response = requests.post(url, headers=headers, files={"file": file})
-    return response
+    headers = {"x-apikey": API_KEY}
+    with open(file_path, "rb") as file:
+        files = {"file": file}
+        response = requests.post(url, headers=headers, files=files)
 
-# Function to get file analysis report from VirusTotal
+    if response.status_code == 200:
+        return response.json()["data"]["id"]  # File ID for further analysis
+    else:
+        return {"error": response.json()}
+
+# Get the analysis status of a file
+def get_analysis_status(file_id):
+    url = f"https://www.virustotal.com/api/v3/analyses/{file_id}"
+    headers = {"x-apikey": API_KEY}
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return {"error": response.json()}
+
+# Get the file report from VirusTotal using the hash
 def get_file_report(file_hash):
     url = f"https://www.virustotal.com/api/v3/files/{file_hash}"
-    headers = {
-        "x-apikey": API_KEY
-    }
+    headers = {"x-apikey": API_KEY}
     response = requests.get(url, headers=headers)
-    return response
 
-# Function to extract file hash from the uploaded file's response
-def get_file_hash(response):
     if response.status_code == 200:
-        data = response.json()
-        return data['data']['id']
+        return response.json()
+    elif response.status_code == 404:
+        return {"error": "File not found in VirusTotal database."}
     else:
-        print("Error uploading file:", response.json())
-        return None
+        return {"error": f"Failed to retrieve report. Status code: {response.status_code}", "details": response.json()}
 
-# Function to save the analysis report to a text file
-def save_report(report_data, output_file):
-    with open(output_file, 'w') as f:
-        f.write("VirusTotal File Report\n")
-        f.write("=" * 50 + "\n")
-        f.write(str(report_data))
+def write_report_to_file(report, file_name="report.json"):
+    try:
+        with open(file_name, "w") as report_file:
+            json.dump(report, report_file, indent=4)
+        print(f"Report successfully saved to {file_name}")
+    except Exception as e:
+        print(f"Failed to save the report: {e}")
 
 # Main function
 def main():
-    if len(sys.argv) != 3:
-        print("Usage: python script.py <input_file> <output_report_file>")
-        sys.exit(1)
-    
-    # Input and output file paths from command-line arguments
-    input_file_path = sys.argv[1]  # Path to input file (file to scan)
-    output_file_path = sys.argv[2]  # Path to output text file for the report
+    file_path = "D:\\sqlite\\sqldiff.exe"  # Replace with your file path
 
-    print(f"Uploading file: {input_file_path}")
-    
-    # Upload the file
-    upload_response = upload_file(input_file_path)
-    
-    if upload_response.status_code == 200:
-        print("File uploaded successfully.")
-        
-        # Extract the file hash from the response
-        file_hash = get_file_hash(upload_response)
-        
-        if file_hash:
-            print("File hash:", file_hash)
-            print("Waiting for file analysis to complete...")
-            # Wait for the analysis to complete
-            time.sleep(15)  # Adjust sleep time if needed
+    # Step 1: Calculate the file hash
+    print(f"Calculating SHA-256 hash for file: {file_path}")
+    file_hash = calculate_file_hash(file_path)
+    print(f"SHA-256 Hash: {file_hash}")
 
-            # Get the file report using the file hash
-            report_response = get_file_report(file_hash)
+    # Step 2: Upload the file to VirusTotal
+    print("Uploading file to VirusTotal...")
+    file_id = upload_file_to_virustotal(file_path)
+    if isinstance(file_id, dict) and "error" in file_id:
+        print(f"Error during file upload: {file_id['error']}")
+        return
+    print(f"File uploaded successfully. File ID: {file_id}")
 
-            if report_response.status_code == 200:
-                print("File analysis complete. Saving report.")
-                # Save the report to the output file
-                save_report(report_response.json(), output_file_path)
-                print(f"Report saved to: {output_file_path}")
-            else:
-                print("Error retrieving file report:", report_response.json())
+    # Step 3: Wait for the analysis to complete
+    print("Waiting for analysis to complete...")
+    while True:
+        analysis_status = get_analysis_status(file_id)
+        if isinstance(analysis_status, dict) and "error" in analysis_status:
+            print(f"Error checking analysis status: {analysis_status['error']}")
+            return
+
+        status = analysis_status["data"]["attributes"]["status"]
+        if status == "completed":
+            print("Analysis completed.")
+            break
         else:
-            print("Error: Unable to get file hash.")
-    else:
-        print("Error uploading file:", upload_response.json())
+            print("Analysis in progress... Retrying in 10 seconds.")
+            time.sleep(10)
 
-# Execute the script
+    # Step 4: Retrieve the file report using the hash
+    print("Fetching the file report...")
+    report = get_file_report(file_hash)
+    if isinstance(report, dict) and "error" in report:
+        print(f"Error fetching file report: {report['error']}")
+    else:
+        print("File Analysis Report:")
+        write_report_to_file(report)
+
+
+# Run the script
 if __name__ == "__main__":
     main()
