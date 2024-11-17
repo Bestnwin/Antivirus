@@ -6,6 +6,13 @@ import requests
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 from PIL import Image, ImageTk
+import time
+import hashlib
+import requests
+import json
+
+# Your VirusTotal API key
+API_KEY = "583278add49d56c4f02caa49bf19e58e857aa59ba28fc1e437651c45620e4b72"  # Replace with your API key
 
 class AntiVirusApp:
     def __init__(self, master):
@@ -138,34 +145,146 @@ class AntiVirusApp:
         file_type = magic.from_file(file_path)
         return file_type
 
+
+        
+
+
+
+
     def check_for_virus_signatures(self, file_path):
+        def check_and_delete_file(file_path):
+                # Check if the file exists
+                if os.path.isfile(file_path):
+                    # Create the tkinter root window, but keep it hidden
+                    root = tk.Tk()
+                    root.withdraw()  # Hide the main window
+
+                    # Ask the user for confirmation to delete the file
+                    confirm = messagebox.askyesno("Delete File", f"Do you want to delete the file '{file_path}'?")
+                    
+                    if confirm:
+                        # Delete the file if the user confirms
+                        os.remove(file_path)
+                        messagebox.showinfo("Deleted", f"File '{file_path}' has been deleted.")
+                    else:
+                        messagebox.showinfo("Canceled", "File deletion canceled.")
+                else:
+                    print(f"File '{file_path}' does not exist.")
+
+#virustotal
+    #api work-
+
+        def calculate_file_hash(file_path):
+            hash_function = hashlib.sha256()
+            with open(file_path, "rb") as file:
+                while chunk := file.read(8192):
+                    hash_function.update(chunk)
+            return hash_function.hexdigest()
+
+        # Upload a file to VirusTotal
+        def upload_file_to_virustotal(file_path):
+            url = "https://www.virustotal.com/api/v3/files"
+            headers = {"x-apikey": API_KEY}
+            with open(file_path, "rb") as file:
+                files = {"file": file}
+                response = requests.post(url, headers=headers, files=files)
+
+            if response.status_code == 200:
+                return response.json()["data"]["id"]  # File ID for further analysis
+            else:
+                return {"error": response.json()}
+
+        # Get the analysis status of a file
+        def get_analysis_status(file_id):
+            url = f"https://www.virustotal.com/api/v3/analyses/{file_id}"
+            headers = {"x-apikey": API_KEY}
+            response = requests.get(url, headers=headers)
+
+            if response.status_code == 200:
+                return response.json()
+            else:
+                return {"error": response.json()}
+
+        # Get the file report from VirusTotal using the hash
+        def get_file_report(file_hash):
+            url = f"https://www.virustotal.com/api/v3/files/{file_hash}"
+            headers = {"x-apikey": API_KEY}
+            response = requests.get(url, headers=headers)
+
+            if response.status_code == 200:
+                return response.json()
+            elif response.status_code == 404:
+                return {"error": "File not found in VirusTotal database."}
+            else:
+                return {"error": f"Failed to retrieve report. Status code: {response.status_code}", "details": response.json()}
+
+        def write_report_to_file(report, file_name="report.json"):
+            try:
+                with open(file_name, "w") as report_file:
+                    json.dump(report, report_file, indent=4)
+                print(f"Report successfully saved to {file_name}")
+            except Exception as e:
+                print(f"Failed to save the report: {e}")
+    
+
+
+
+        def virus_total_report(file_path,file_hash):
+            file_id = upload_file_to_virustotal(file_path)
+            if isinstance(file_id, dict) and "error" in file_id:
+                print(f"Error during file upload: {file_id['error']}")
+                return
+            print(f"File uploaded successfully. File ID: {file_id}")
+
+            # Step 3: Wait for the analysis to complete
+            print("Waiting for analysis to complete...")
+            while True:
+                analysis_status = get_analysis_status(file_id)
+                if isinstance(analysis_status, dict) and "error" in analysis_status:
+                    print(f"Error checking analysis status: {analysis_status['error']}")
+                    return
+
+                status = analysis_status["data"]["attributes"]["status"]
+                if status == "completed":
+                    print("Analysis completed.")
+                    break
+                else:
+                    print("Analysis in progress... Retrying in 10 seconds.")
+                    time.sleep(10)
+
+            # Step 4: Retrieve the file report using the hash
+            print("Fetching the file report...")
+            report = get_file_report(file_hash)
+            if isinstance(report, dict) and "error" in report:
+                print(f"Error fetching file report: {report['error']}")
+            else:
+                print("File Analysis Report:")
+                return report
+
+        
+
+
         file_hash = self.get_file_hashes(file_path)
         with open('hashes.txt', 'r') as file:        #hash input 
             lines = file.readlines()
         virus_signatures = [line.strip() for line in lines]
-
-       
-        def check_and_delete_file(file_path):
-            if os.path.isfile(file_path):
-
-                root = tk.Tk() #popup
-                root.withdraw() 
-                confirm = messagebox.askyesno("Delete File", f"Do you want to delete the file '{file_path}'?")
-                if confirm:
-                    os.remove(file_path)
-                    messagebox.showinfo("Deleted", f"File '{file_path}' has been deleted.")
-                else:
-                    messagebox.showinfo("Canceled", "File deletion canceled.")
-            else:
-                print(f"File '{file_path}' does not exist.")
+        report=virus_total_report(file_path,file_hash)
+        
+        def is_detected_from_report(report):
+            # Iterate through the engines in the 'last_analysis_results' section
+            for engine in report.get('data', {}).get('last_analysis_results', {}).values():
+                # Check if the 'category' is 'detected'
+                if engine.get('category') == 'detected':
+                    return True
+            return False
 
 
-        if file_hash in virus_signatures:       #check if it is clean or not
-            return True
+        if file_hash in virus_signatures or is_detected_from_report(report):       #check if it is clean or not
+
+            return report,True
             
         else:
-            check_and_delete_file(file_path)
-            return False
+            return report,False
 
 
     def scan_file(self):
@@ -177,14 +296,17 @@ class AntiVirusApp:
 
         file_type = self.identify_file_type(file_path)                    
         self.status_var.set(f"Scanning file: {file_path} ({file_type})")
+        report,check=self.check_for_virus_signatures(file_path)
 
-
-        if self.check_for_virus_signatures(file_path):                                  #give pop up wether it is clean or not
+        if check:                                  #give pop up wether it is clean or not
             self.status_var.set(f"Virus detected in {file_path}!")
             messagebox.showerror("Virus Detected", f"Virus detected in {file_path}!")
+            messagebox.showinfo("Scan Complete", f"{report} is clean.")
+            check_and_delete_file(file_path)
         else:
             self.status_var.set(f"{file_path} is clean.")
             messagebox.showinfo("Scan Complete", f"{file_path} is clean.")
+            messagebox.showinfo("Scan Complete", f"{report} is clean.")
 
 
 def main():
