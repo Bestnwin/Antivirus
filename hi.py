@@ -1,6 +1,7 @@
 import time
 import hashlib
 import requests
+import json
 
 # Your VirusTotal API key
 API_KEY = "583278add49d56c4f02caa49bf19e58e857aa59ba28fc1e437651c45620e4b72"  # Replace with your API key
@@ -50,7 +51,7 @@ def get_file_report(file_hash):
     else:
         return {"error": f"Failed to retrieve report. Status code: {response.status_code}", "details": response.json()}
 
-def write_report_to_file(report, file_name="report.txt"):
+def write_report_to_file(report, file_name="report.json"):
     try:
         with open(file_name, "w") as report_file:
             json.dump(report, report_file, indent=4)
