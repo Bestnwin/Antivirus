@@ -9,7 +9,7 @@ import time
 
 url = 'https://www.virustotal.com/api/v3/files/'
 # You'll need to create an environment variable VT_API_KEY with your API key as the value
-headers = {'x-apikey': os.environ['583278add49d56c4f02caa49bf19e58e857aa59ba28fc1e437651c45620e4b72']}
+headers = {'x-apikey': os.environ['ur api']}
 counter = 0
 linecounter = 0
 
