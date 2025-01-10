@@ -14,7 +14,7 @@ import pandas as pd
 
 
 # Your VirusTotal API key
-API_KEY = "ur api_key"  # Replace with your API key
+API_KEY = ""  # Replace with your API key
 
 class AntiVirusApp:
     def __init__(self, master):
@@ -86,7 +86,7 @@ class AntiVirusApp:
         browse_button.bind("<Enter>", on_browse_hover)
         browse_button.bind("<Leave>", on_browse_leave)
 
-        scan_button = tk.Button(    #scan button 
+        scan_button = tk.Button(   
             self.master,
             text="Scan File",
             font=("Helvetica", 16, "bold"),
@@ -102,7 +102,6 @@ class AntiVirusApp:
         scan_button.pack(pady=20)
         
 
-        #hover button 
         def scan_hover(event):      
             scan_button.config(bg="blue")
 
@@ -140,7 +139,7 @@ class AntiVirusApp:
     def get_file_hashes(self, file_path):
         with open(file_path, 'rb') as file:
             file_data = file.read()
-            hash = hashlib.sha256(file_data).hexdigest()    #hash is sha256
+            hash = hashlib.sha256(file_data).hexdigest()    
         return hash
 
     def identify_file_type(self, file_path):
@@ -155,17 +154,17 @@ class AntiVirusApp:
 
     def check_for_virus_signatures(self, file_path):
         def check_and_delete_file(file_path):
-                # Check if the file exists
+     
                 if os.path.isfile(file_path):
-                    # Create the tkinter root window, but keep it hidden
+           
                     root = tk.Tk()
-                    root.withdraw()  # Hide the main window
+                    root.withdraw()  
 
-                    # Ask the user for confirmation to delete the file
+   
                     confirm = messagebox.askyesno("Delete File", f"Do you want to delete the file '{file_path}'?")
                     
                     if confirm:
-                        # Delete the file if the user confirms
+                       
                         os.remove(file_path)
                         messagebox.showinfo("Deleted", f"File '{file_path}' has been deleted.")
                     else:
@@ -192,11 +191,11 @@ class AntiVirusApp:
                 response = requests.post(url, headers=headers, files=files)
 
             if response.status_code == 200:
-                return response.json()["data"]["id"]  # File ID for further analysis
+                return response.json()["data"]["id"] 
             else:
                 return {"error": response.json()}
 
-        # Get the analysis status of a file
+       
         def get_analysis_status(file_id):
             url = f"https://www.virustotal.com/api/v3/analyses/{file_id}"
             headers = {"x-apikey": API_KEY}
@@ -207,7 +206,6 @@ class AntiVirusApp:
             else:
                 return {"error": response.json()}
 
-        # Get the file report from VirusTotal using the hash
         def get_file_report(file_hash):
             url = f"https://www.virustotal.com/api/v3/files/{file_hash}"
             headers = {"x-apikey": API_KEY}
@@ -238,7 +236,6 @@ class AntiVirusApp:
                 return
             print(f"File uploaded successfully. File ID: {file_id}")
 
-            # Step 3: Wait for the analysis to complete
             print("Waiting for analysis to complete...")
             while True:
                 analysis_status = get_analysis_status(file_id)
@@ -254,7 +251,6 @@ class AntiVirusApp:
                     print("Analysis in progress... Retrying in 10 seconds.")
                     time.sleep(10)
 
-            # Step 4: Retrieve the file report using the hash
             print("Fetching the file report...")
             report = get_file_report(file_hash)
             if isinstance(report, dict) and "error" in report:
@@ -271,23 +267,22 @@ class AntiVirusApp:
             lines = file.readlines()
         virus_signatures = [line.strip() for line in lines]
         report=virus_total_report(file_path,file_hash)
-        # Extracting the `last_analysis_results`
+
         results = report["data"]["attributes"]["last_analysis_results"]
 
-        # Converting to a pandas DataFrame for tabular representation
-        df = pd.DataFrame(results).T  # .T to transpose since we want keys as rows
 
-        # File paths
+        df = pd.DataFrame(results).T  
+
+   
         output_dir = "output"
         os.makedirs(output_dir, exist_ok=True)
         json_file_path = os.path.join(output_dir, "formatted_report.json")
         table_file_path = os.path.join(output_dir, "last_analysis_results.txt")
 
-        # Save full JSON data in a formatted JSON file
+
         with open(json_file_path, "w") as json_file:
             json.dump(report, json_file, indent=4)
 
-        # Save the table to a text file
         with open(table_file_path, "w") as table_file:
             table_file.write(df.to_string(index=True))
 
@@ -299,13 +294,12 @@ class AntiVirusApp:
         os.remove(table_file_path)
         print(f"Table file '{table_file_path}' deleted after displaying.")
 
-        # The JSON file is not deleted
         print(f"Formatted JSON saved to {json_file_path}")
         
         def is_detected_from_report(report):
-            # Iterate through the engines in the 'last_analysis_results' section
+           
             for engine in report.get('data', {}).get('last_analysis_results', {}).values():
-                # Check if the 'category' is 'detected'
+              
                 if engine.get('category') == 'detected':
                     return True
             return False
@@ -320,7 +314,7 @@ class AntiVirusApp:
 
     def scan_file(self):
         file_path = self.file_path.get()
-        if not os.path.isfile(file_path):                              #check file path
+        if not os.path.isfile(file_path):                              
             self.status_var.set(f"Invalid file path: {file_path}")
             messagebox.showerror("Invalid File", f"Invalid file path: {file_path}")
             return
@@ -329,7 +323,7 @@ class AntiVirusApp:
         self.status_var.set(f"Scanning file: {file_path} ({file_type})")
         check=self.check_for_virus_signatures(file_path)
 
-        if check:                                  #give pop up wether it is clean or not
+        if check:                                
             self.status_var.set(f"Virus detected in {file_path}!")
             messagebox.showerror("Virus Detected", f"Virus detected in {file_path}!")
             check_and_delete_file(file_path)
